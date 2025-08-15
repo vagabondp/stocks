@@ -1,0 +1,92 @@
+[
+  {
+    "title": "A1: Repo & Stack Setup",
+    "body": "Epic A — Foundation\n\n- Init Next.js 14 (TypeScript, App Router) + TailwindCSS\n- Add ESLint + Prettier + Vitest + Playwright\n- Setup CI workflow for lint/test/build on PR\n- Create .env.example with placeholders for DB + Auth",
+    "labels": ["Epic A — Foundation"]
+  },
+  {
+    "title": "A2: Auth Setup",
+    "body": "Epic A — Foundation\n\n- Add NextAuth with Email Magic Link provider\n- Create login page /login\n- Redirect unauthenticated users to login",
+    "labels": ["Epic A — Foundation"]
+  },
+  {
+    "title": "A3: Database & ORM",
+    "body": "Epic A — Foundation\n\n- Add PostgreSQL (Supabase or RDS)\n- Setup Prisma schema for Users, Transactions, OptionLegs, StockPositions, StrategyInstance, StrategyLegs\n- Run initial migration + seed script with sample trades",
+    "labels": ["Epic A — Foundation"]
+  },
+  {
+    "title": "B1: CSV Import API",
+    "body": "Epic B — Transactions & Positions\n\n- Create /api/transactions/import endpoint with Zod validation\n- Parse CSV → store in Transactions table\n- Return count of imported rows",
+    "labels": ["Epic B — Transactions & Positions"]
+  },
+  {
+    "title": "B2: Positions Builder",
+    "body": "Epic B — Transactions & Positions\n\n- Build stock positions from transaction history (avg. cost, qty)\n- Build option legs (open/close matching) from option trades",
+    "labels": ["Epic B — Transactions & Positions"]
+  },
+  {
+    "title": "C1: Wheel Detection Logic",
+    "body": "Epic C — Strategy Detection\n\n- Detect short put → assignment → covered call cycles\n- Track cost basis for CC suggestion",
+    "labels": ["Epic C — Strategy Detection"]
+  },
+  {
+    "title": "C2: Strangle Detection Logic",
+    "body": "Epic C — Strategy Detection\n\n- Detect short/long strangles by expiry pairing\n- Attach legs to strategy instance",
+    "labels": ["Epic C — Strategy Detection"]
+  },
+  {
+    "title": "C3: Strategy Refresh",
+    "body": "Epic C — Strategy Detection\n\n- Create /api/strategies/detect to rebuild from transactions\n- Store in StrategyInstance table",
+    "labels": ["Epic C — Strategy Detection"]
+  },
+  {
+    "title": "D1: Wheel Suggestion Rules",
+    "body": "Epic D — Next Step Suggestions\n\n- After assignment → Sell CC (≥ 1–2%/30d or Δ 0.25–0.35)\n- After called away → Sell CSP (Δ 0.25–0.30)",
+    "labels": ["Epic D — Next Step Suggestions"]
+  },
+  {
+    "title": "D2: Strangle Suggestion Rules",
+    "body": "Epic D — Next Step Suggestions\n\n- Short strangle breach (Δ ≥ 0.40) → Roll threatened leg\n- Short strangle 50% profit → Close both legs",
+    "labels": ["Epic D — Next Step Suggestions"]
+  },
+  {
+    "title": "D3: Suggestion API",
+    "body": "Epic D — Next Step Suggestions\n\n- /api/suggestions?strategyId=... returns action + rationale",
+    "labels": ["Epic D — Next Step Suggestions"]
+  },
+  {
+    "title": "E1: Dashboard Page /dashboard",
+    "body": "Epic E — UI\n\n- Watchlist table\n- Portfolio summary (stocks + options)\n- Open strategies with badge + next step chip",
+    "labels": ["Epic E — UI"]
+  },
+  {
+    "title": "E2: Transactions Page /transactions",
+    "body": "Epic E — UI\n\n- CSV upload form → import status toast\n- Table of past transactions",
+    "labels": ["Epic E — UI"]
+  },
+  {
+    "title": "E3: Strategy Detail /strategies/[ticker]",
+    "body": "Epic E — UI\n\n- Timeline view (Wheel or Strangle steps)\n- Next Step card with action & rationale",
+    "labels": ["Epic E — UI"]
+  },
+  {
+    "title": "E4: Styling",
+    "body": "Epic E — UI\n\n- Dark mode toggle\n- Empty states & loading skeletons",
+    "labels": ["Epic E — UI"]
+  },
+  {
+    "title": "F1: Unit Tests",
+    "body": "Epic F — Testing & Polish\n\n- Test detection rules with sample trades\n- Test suggestion rules",
+    "labels": ["Epic F — Testing & Polish"]
+  },
+  {
+    "title": "F2: E2E Smoke Tests (Playwright)",
+    "body": "Epic F — Testing & Polish\n\n- Import → detect → suggest flow works\n- Auth & redirect logic works",
+    "labels": ["Epic F — Testing & Polish"]
+  },
+  {
+    "title": "F3: Final Polish",
+    "body": "Epic F — Testing & Polish\n\n- Code review cleanup\n- Update README with setup instructions",
+    "labels": ["Epic F — Testing & Polish"]
+  }
+]
